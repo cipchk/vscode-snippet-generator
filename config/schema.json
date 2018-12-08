@@ -1,0 +1,8 @@
+{
+  "todo": "https://github.com/angular/angular-cli/blob/master/packages/angular/cli/lib/config/schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "id": "https://github.com/cipchk/vscode-snippet-generator",
+  "title": "vscode-snippet-generator Configuration",
+  "type": "object",
+  "properties": {}
+}

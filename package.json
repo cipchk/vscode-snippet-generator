@@ -1,0 +1,64 @@
+{
+  "name": "vscode-snippet-generator",
+  "version": "0.0.1-rc.1",
+  "description": "Generate a snippet extensions for vscode",
+  "scripts": {
+    "build": "bash ./build.sh",
+    "lint": "tslint -p tsconfig.json -c tslint.json 'src/**/*.ts'",
+    "test": "npm run mocha --recursive ./test/**/*.spec.ts",
+    "mocha": "mocha -r ts-node/register",
+    "ci": "npm run lint && npm run test",
+    "release:next": "npm run build && cd dist && npm publish --access public --tag next"
+  },
+  "bin": {
+    "vscode-snippet-generator": "src/index.js"
+  },
+  "publisher": "cipchk",
+  "license": "MIT",
+  "homepage": "https://github.com/cipchk/vscode-snippet-generator/blob/master/README.md",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cipchk/vscode-snippet-generator.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cipchk/vscode-snippet-generator/issues",
+    "email": "cipchk@qq.com"
+  },
+  "keywords": [
+    "vscode",
+    "vscode snippet",
+    "vscode extension"
+  ],
+  "engines": {
+    "vscode": "^1.0.0"
+  },
+  "categories": ["Snippets"],
+  "contributes": {
+    "snippets": [{
+      "language": "html",
+      "path": "./snippets.json"
+    }]
+  },
+  "dependencies": {
+    "chalk": "^2.4.1",
+    "meow": "^5.0.0",
+    "klaw-sync": "^6.0.0",
+    "yaml-front-matter": "^4.0.0",
+    "markdown-it": "^8.4.2"
+  },
+  "devDependencies": {
+    "@types/node": "^10.12.2",
+    "@types/meow": "^5.0.0",
+    "@types/mocha": "^5.2.5",
+    "@types/chai": "^4.1.7",
+    "@types/markdown-it": "^0.0.7",
+    "@types/klaw-sync": "^5.0.0",
+    "@types/chalk": "^2.2.0",
+    "typescript": "^3.2.2",
+    "ts-node": "^7.0.1",
+    "tslint": "^5.11.0",
+    "tslint-config-prettier": "^1.17.0",
+    "mocha": "^5.2.0",
+    "chai": "^4.2.0"
+  }
+}
