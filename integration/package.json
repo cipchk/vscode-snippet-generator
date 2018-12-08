@@ -33,6 +33,6 @@
     }]
   },
   "devDependencies": {
-    "vscode-snippet-generator": "^0.0.1-rc.1"
+    "vscode-snippet-generator": "^1.0.0"
   }
 }

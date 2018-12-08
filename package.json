@@ -1,6 +1,6 @@
 {
   "name": "vscode-snippet-generator",
-  "version": "0.0.1-rc.1",
+  "version": "1.0.0",
   "description": "Generate a snippet extensions for vscode",
   "scripts": {
     "build": "bash ./build.sh",
@@ -8,7 +8,7 @@
     "test": "npm run mocha --recursive ./test/**/*.spec.ts",
     "mocha": "mocha -r ts-node/register",
     "ci": "npm run lint && npm run test",
-    "release:next": "npm run build && cd dist && npm publish --access public --tag next"
+    "release": "npm run build && cd dist && npm publish --access public"
   },
   "bin": {
     "vscode-snippet-generator": "src/index.js"

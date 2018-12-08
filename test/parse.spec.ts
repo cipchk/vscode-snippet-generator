@@ -15,7 +15,7 @@ describe('parse', () => {
     expect(res.prefix).to.be.eq('button');
     expect(res.description).to.be.eq('按钮');
     expect(res.scope).to.be.eq('typescript,html');
-    expect(res.body).to.be.eq('<button><button>');
+    expect(res.body).to.be.contain('<button>');
   });
   it('should throw error when not found code body', () => {
     expect(() => {
