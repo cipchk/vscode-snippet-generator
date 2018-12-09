@@ -14,7 +14,7 @@ function genPrefix(first: string, relativePath: string): string[] {
     ...relativePath
       .split(path.sep)
       .filter(w => w.length > 0)
-      .map(w => w.substr(0, w.length - 3))
+      .map(w => w.endsWith('.md') ? w.substr(0, w.length - 3) : w)
       .filter(w => w.length > 0)
   );
   return res;

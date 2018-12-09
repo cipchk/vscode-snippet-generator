@@ -10,13 +10,10 @@ Generate a snippet extensions for vscode.
 ## Quick start
 
 ```sh
-$ npm i -g vscode-snippet-generator
 $ git clone --depth 1 https://github.com/cipchk/vscode-snippet-generator-tpl.git
 $ cd vscode-snippet-generator-tpl
-$ # build type 1
-$ vscode-snippet-generator
-$ # build type 2
-$ npm run release
+$ # build
+$ npm run build
 $ # package vscode extension
 $ npm run release
 ```

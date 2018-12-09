@@ -1,0 +1,7 @@
+{
+  "$schema": "./schema.json",
+  "outFile": "snippets.json",
+  "prefix": "as",
+  "separator": "-",
+  "sourceRoot": "src"
+}
