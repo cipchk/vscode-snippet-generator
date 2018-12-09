@@ -13,16 +13,16 @@
   }, {
     "type": "node",
     "request": "launch",
-    "name": "Current Tests File",
+    "name": "Test",
     "program": "${workspaceRoot}/node_modules/mocha/bin/_mocha",
-    "args": ["-r", "ts-node/register", "test/generator.spec.ts"],
+    "args": ["-r", "ts-node/register", "test/parse.spec.ts"],
     "cwd": "${workspaceRoot}",
     "protocol": "inspector",
     "internalConsoleOptions": "openOnSessionStart"
   }, {
     "type": "node",
     "request": "launch",
-    "name": "Current ts file",
+    "name": "Ts",
     "args": ["src/index.ts"],
     "runtimeArgs": ["-r", "ts-node/register"],
     "cwd": "${workspaceRoot}",
