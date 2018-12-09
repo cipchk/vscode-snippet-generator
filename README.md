@@ -2,7 +2,6 @@
 
 [![Build Status](https://img.shields.io/travis/cipchk/vscode-snippet-generator/master.svg?style=flat-square)](https://travis-ci.org/cipchk/vscode-snippet-generator)
 [![Dependency Status](https://david-dm.org/cipchk/vscode-snippet-generator/status.svg?style=flat-square)](https://david-dm.org/cipchk/vscode-snippet-generator)
-[![GitHub Release Date](https://img.shields.io/github/release-date/cipchk/vscode-snippet-generator.svg?style=flat-square)](https://github.com/cipchk/vscode-snippet-generator/releases)
 [![NPM version](https://img.shields.io/npm/v/vscode-snippet-generator.svg?style=flat-square)](https://www.npmjs.com/package/vscode-snippet-generator)
 
 Generate a snippet extensions for vscode.
