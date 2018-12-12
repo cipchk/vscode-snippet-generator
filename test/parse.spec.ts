@@ -53,4 +53,13 @@ describe('parse', () => {
     );
     expect(res.description).to.be.eq('按钮(Button)');
   });
+  it('should be i18n codes', () => {
+    const fileName = 'i18n-code.md';
+    const resCN = parse(getMd(fileName), `c:${path.sep}mock${path.sep}${fileName}`, DEFAULT_CONFIG);
+    expect(resCN.description).to.be.eq('按钮');
+    expect(resCN.body).to.be.eq('<a>zh</a>');
+    const resEN = parse(getMd(fileName), `c:${path.sep}mock${path.sep}${fileName}`, { ...DEFAULT_CONFIG, i18n: 'en-US' });
+    expect(resEN.description).to.be.eq('Button');
+    expect(resEN.body).to.be.eq('<a>en</a>');
+  });
 });

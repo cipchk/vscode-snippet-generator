@@ -11,7 +11,7 @@
         "sourceRoot": {
           "type": "string",
           "default": "src",
-          "description": "Source file root directory"
+          "description": "Source file root directory, can be set \"src\" \"src1,src2\""
         },
         "outFile": {
           "type": "string",
@@ -26,6 +26,11 @@
           "type": "string",
           "default": "-",
           "description": "Multi-level directory separator"
+        },
+        "ingoreDefaultMd": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether to ignore `default.md` of the secondary directory, only keep directory name"
         },
         "i18n": {
           "type": "string",

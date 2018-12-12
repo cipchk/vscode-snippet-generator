@@ -15,13 +15,15 @@ const cli = meow({
     vscode-snippet-generator --outFile file.json
 
   Options
-    --sourceRoot      Source file root directory, default: ${DEFAULT_CONFIG.sourceRoot}
+    -s, --sourceRoot  Source file root directory, can be set "src" "src1,src2", default: ${DEFAULT_CONFIG.sourceRoot}
 
-    --outFile         Output file path, default: ${DEFAULT_CONFIG.outFile}
+    -o, --outFile     Output file path, default: ${DEFAULT_CONFIG.outFile}
 
-    --prefix          Unified prefix
+    -p, --prefix      Unified prefix
 
     --separator       Multi-level directory separator, default: ${DEFAULT_CONFIG.separator}
+
+    --ingoreDefaultMd Whether to ignore "default.md" of the secondary directory, only keep directory name, default: ${DEFAULT_CONFIG.ingoreDefaultMd}
 
     --i18n            Specify the language key name to generate, default: ${DEFAULT_CONFIG.i18n}
 
@@ -31,18 +33,25 @@ const cli = meow({
   flags: {
     sourceRoot: {
       type: 'string',
-      default: DEFAULT_CONFIG.sourceRoot
+      default: DEFAULT_CONFIG.sourceRoot,
+      alias: 's'
     },
     outFile: {
       type: 'string',
       default: DEFAULT_CONFIG.outFile,
+      alias: 'o'
     },
     prefix: {
-      type: 'string'
+      type: 'string',
+      alias: 'p'
     },
     separator: {
       type: 'string',
       default: DEFAULT_CONFIG.separator
+    },
+    ingoreDefaultMd: {
+      type: 'boolean',
+      default: DEFAULT_CONFIG.ingoreDefaultMd
     },
     i18n: {
       type: 'string',
@@ -73,6 +82,11 @@ const options = {
   ...configInFile,
   ...cli.flags
 } as ConfigSchema;
+
+const sourceRoot: string = options.sourceRoot.toString().trim();
+if (sourceRoot.includes(',')) {
+  options.sourceRoot = sourceRoot.split(',').map(p => p.trim());
+}
 
 const res = generator(options);
 const content = JSON.stringify(res, null, 2);

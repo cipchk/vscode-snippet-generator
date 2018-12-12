@@ -1,5 +1,4 @@
 ---
-name: test name
 prefix: type
 description: 按钮
 scope: typescript,html

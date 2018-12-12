@@ -3,5 +3,6 @@
   "outFile": "snippets.json",
   "prefix": "as",
   "separator": "-",
-  "sourceRoot": "src"
+  "sourceRoot": "src",
+  "ingoreDefaultMd": true
 }

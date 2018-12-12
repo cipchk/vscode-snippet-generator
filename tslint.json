@@ -21,6 +21,9 @@
       "never-prefix"
     ],
     "no-var-requires": false,
-    "no-object-literal-type-assertion": false
+    "no-object-literal-type-assertion": false,
+    "no-conditional-assignment": false,
+    "curly": false,
+    "no-shadowed-variable": false
   }
 }

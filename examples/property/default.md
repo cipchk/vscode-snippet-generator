@@ -1,0 +1,3 @@
+```html
+<default>property</default>
+```

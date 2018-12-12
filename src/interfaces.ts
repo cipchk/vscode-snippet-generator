@@ -1,12 +1,14 @@
 export interface ConfigSchema {
-  /** Source file root directory, default: `src` */
-  sourceRoot: string;
+  /** Source file root directory, can be set "src" "src1,src2", default: `src` */
+  sourceRoot: string | string[];
   /** Output file path, default: `snippets.json` */
   outFile: string;
   /** Unified prefix */
   prefix: string;
   /** Multi-level directory separator, default: `-` */
   separator: string;
+  /** Whether to ignore `default.md` of the secondary directory, only keep directory name, default: `true` */
+  ingoreDefaultMd: boolean;
   /** Specify the language key name to generate, default: `zh-CN` */
   i18n: string;
   /**
@@ -25,6 +27,7 @@ export const DEFAULT_CONFIG: ConfigSchema = {
   outFile: 'snippets.json',
   prefix: '',
   separator: '-',
+  ingoreDefaultMd: true,
   i18n: DEFAULT_LANG
 };
 
