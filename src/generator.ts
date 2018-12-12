@@ -2,7 +2,7 @@ import chalk from 'chalk';
 import * as fs from 'fs';
 import klaw from 'klaw-sync';
 import * as path from 'path';
-import { ConfigSchema, DEFAULT_CONFIG, Snippet } from './interfaces';
+import { ConfigSchema, DEFAULT_CONFIG, GenerateOptions, Snippet } from './interfaces';
 import { parse } from './parse';
 
 function genPrefix(first: string, relativePath: string, ingoreDefaultMd: boolean): string[] {
@@ -34,7 +34,7 @@ function cleanObject(obj: { [key: string]: Snippet }) {
   return res;
 }
 
-export function generator(config?: ConfigSchema) {
+export function generator(config?: ConfigSchema, options?: GenerateOptions) {
   const cog = {
     ...DEFAULT_CONFIG,
     ...config
@@ -57,14 +57,18 @@ export function generator(config?: ConfigSchema) {
         });
     });
 
-  const res: { [key: string]: Snippet } = {};
+  let res: { [key: string]: Snippet } = {};
   sourcePaths.forEach(sourceItem => {
     const relativePath = path.relative(sourceItem.rootPath, sourceItem.fullPath);
     const md = fs.readFileSync(sourceItem.fullPath).toString('utf8');
     try {
-      const item = parse(md, sourceItem.fullPath, cog);
+      let item = parse(md, sourceItem.fullPath, cog);
       const keys = genPrefix(cog.prefix, relativePath, cog.ingoreDefaultMd);
       item.prefix = keys.join(cog.separator);
+      if (options && options.itemFinished) {
+        item = options.itemFinished(item);
+      }
+
       res[keys.join('_')] = item;
     } catch (err) {
       console.log(`>> File ${relativePath} parse error: ${chalk.red(err)}`);
@@ -79,5 +83,16 @@ export function generator(config?: ConfigSchema) {
     console.log(`🌈  Find ${chalk.green(sourcePaths.length + '')} markdowns, ${chalk.green('All Success')}`);
   }
 
-  return cleanObject(res);
+  res = cleanObject(res);
+  if (options && options.finished) {
+    res = options.finished(res);
+  }
+
+  const content = JSON.stringify(res, null, 2);
+  const saveFile = path.resolve(process.cwd(), cog.outFile);
+  if (fs.existsSync(saveFile)) {
+    fs.unlinkSync(saveFile);
+  }
+  fs.writeFileSync(saveFile, content);
+  return res;
 }

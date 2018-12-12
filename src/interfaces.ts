@@ -20,6 +20,11 @@ export interface ConfigSchema {
   i18nTpl?: string;
 }
 
+export interface GenerateOptions {
+  finished?: (res: { [key: string]: Snippet }) => { [key: string]: Snippet };
+  itemFinished?: (item: Snippet) => Snippet;
+}
+
 export const DEFAULT_LANG = 'zh-CN';
 
 export const DEFAULT_CONFIG: ConfigSchema = {

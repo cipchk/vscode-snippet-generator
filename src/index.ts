@@ -88,10 +88,4 @@ if (sourceRoot.includes(',')) {
   options.sourceRoot = sourceRoot.split(',').map(p => p.trim());
 }
 
-const res = generator(options);
-const content = JSON.stringify(res, null, 2);
-const saveFile = path.resolve(process.cwd(), options.outFile);
-if (fs.existsSync(saveFile)) {
-  fs.unlinkSync(saveFile);
-}
-fs.writeFileSync(saveFile, content);
+generator(options);
