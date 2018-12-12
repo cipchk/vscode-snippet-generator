@@ -1,12 +1,12 @@
 import markdownit from 'markdown-it';
 const yamlFront = require('yaml-front-matter');
 import * as path from 'path';
-import { Snippet } from './interfaces';
+import { ConfigSchema, DEFAULT_LANG, Snippet } from './interfaces';
 
 const it = new markdownit({});
 
 function isUndefined(meta: Snippet, key: string): boolean {
-  return meta[key] != null && meta[key].length > 0;
+  return meta[key] != null;
 }
 
 function fixPrefix(meta: Snippet, fileName: string) {
@@ -17,7 +17,7 @@ function fixPrefix(meta: Snippet, fileName: string) {
   return name.endsWith('.md') ? name.substr(0, name.length - 3) : name;
 }
 
-export function parse(md: string, fileName: string): Snippet {
+export function parse(md: string, fileName: string, config: ConfigSchema): Snippet {
   const meta: Snippet = yamlFront.loadFront(md);
   const tokens = it.parse(meta.__content.toString() || '', {});
   delete meta.__content;
@@ -31,6 +31,15 @@ export function parse(md: string, fileName: string): Snippet {
     if (paragraphOpenTokenIndex !== -1 && tokens.length >= (paragraphOpenTokenIndex + 1)) {
       const paragraphToken = tokens[paragraphOpenTokenIndex + 1];
       meta.description = paragraphToken.content.trim();
+    }
+  } else if (typeof meta.description === 'object') {
+    const source = meta.description as { [key: string]: string };
+    if (typeof config.i18nTpl === 'string' && config.i18nTpl.length > 0) {
+      meta.description = config.i18nTpl.replace(/\{([^}]+)\}/g, (word, lang) => {
+        return source[lang] || source[DEFAULT_LANG];
+      });
+    } else {
+      meta.description = source[config.i18n] || source[DEFAULT_LANG];
     }
   }
   meta.prefix = fixPrefix(meta, fileName);

@@ -12,16 +12,18 @@ const cli = meow({
     vscode-snippet-generator
 
   Example
-    vscode-snippet-generator -i CHANGELOG.md --same-file
+    vscode-snippet-generator --outFile file.json
 
   Options
-    --sourceRoot      Source file root directory, default: src
+    --sourceRoot      Source file root directory, default: ${DEFAULT_CONFIG.sourceRoot}
 
-    --outFile         Output file path, default: snippets.json
+    --outFile         Output file path, default: ${DEFAULT_CONFIG.outFile}
 
     --prefix          Unified prefix
 
-    --separator       Multi-level directory separator, default: -
+    --separator       Multi-level directory separator, default: ${DEFAULT_CONFIG.separator}
+
+    --i18n            Specify the language key name to generate, default: ${DEFAULT_CONFIG.i18n}
 
     --config          A filepath of your config script
                       Example of a config script: https://github.com/cipchk/vscode-snippet-generator-tpl/blob/master/snippet-config.json
@@ -29,18 +31,22 @@ const cli = meow({
   flags: {
     sourceRoot: {
       type: 'string',
-      default: 'src'
+      default: DEFAULT_CONFIG.sourceRoot
     },
     outFile: {
       type: 'string',
-      default: 'snippets.json'
+      default: DEFAULT_CONFIG.outFile,
     },
     prefix: {
       type: 'string'
     },
     separator: {
       type: 'string',
-      default: '-'
+      default: DEFAULT_CONFIG.separator
+    },
+    i18n: {
+      type: 'string',
+      default: DEFAULT_CONFIG.i18n
     },
     config: {
       type: 'string',
@@ -64,8 +70,8 @@ try {
 
 const options = {
   ...DEFAULT_CONFIG,
-  ...cli.flags,
-  ...configInFile
+  ...configInFile,
+  ...cli.flags
 } as ConfigSchema;
 
 const res = generator(options);

@@ -26,6 +26,11 @@
           "type": "string",
           "default": "-",
           "description": "Multi-level directory separator"
+        },
+        "i18n": {
+          "type": "string",
+          "default": "zh-CN",
+          "description": "Specify the language key name to generate"
         }
       }
     }

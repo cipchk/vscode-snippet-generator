@@ -7,13 +7,25 @@ export interface ConfigSchema {
   prefix: string;
   /** Multi-level directory separator, default: `-` */
   separator: string;
+  /** Specify the language key name to generate, default: `zh-CN` */
+  i18n: string;
+  /**
+   * 语言字符串模板
+   * ```
+   * {zh-CN}({en-US})
+   * ```
+   */
+  i18nTpl?: string;
 }
 
-export const DEFAULT_CONFIG = {
+export const DEFAULT_LANG = 'zh-CN';
+
+export const DEFAULT_CONFIG: ConfigSchema = {
   sourceRoot: 'src',
   outFile: 'snippets.json',
   prefix: '',
-  separator: '-'
+  separator: '-',
+  i18n: DEFAULT_LANG
 };
 
 export interface Snippet {

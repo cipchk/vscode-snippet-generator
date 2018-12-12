@@ -51,7 +51,7 @@ export function generator(config?: ConfigSchema) {
     const relativePath = path.relative(sourceRoot, filePath);
     const md = fs.readFileSync(filePath).toString('utf8');
     try {
-      const item = parse(md, filePath);
+      const item = parse(md, filePath, cog);
       const keys = genPrefix(cog.prefix, relativePath);
       item.prefix = keys.join(cog.separator);
       res[keys.join('_')] = item;

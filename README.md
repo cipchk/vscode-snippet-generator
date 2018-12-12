@@ -46,6 +46,33 @@ scope: typescript,html
 
 > How to writing snippet code, pls refre to [vscode-Creating your own snippets](https://code.visualstudio.com/docs/editor/userdefinedsnippets)
 
+## I18n
+
+The `description` support i18n, like this:
+
+```markdown
+---
+prefix: button
+description:
+  zh-CN: 按钮
+  en-US: Button
+---
+```
+
+Specify language version to generate with `i18n` parameter.
+
+```bash
+vscode-snippet-generator --i18n=zh-CN --outFile=snippets-zh-CN.json
+vscode-snippet-generator --i18n=en-US --outFile=snippets-en-US.json
+```
+
+If you want to display multiple languages in a snippet extension, you can use `i18nTpl`.
+
+```bash
+# window
+vscode-snippet-generator --i18nTpl=\"{zh-CN}({en-US})\"
+```
+
 ## License
 
 The MIT License (see the [LICENSE](https://github.com/cipchk/vscode-snippet-generator/blob/master/LICENSE) file for the full text)
