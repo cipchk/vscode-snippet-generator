@@ -1,7 +1,5 @@
 name: CI
 
-on: push
-
 jobs:
   generator:
     runs-on: ubuntu-latest
