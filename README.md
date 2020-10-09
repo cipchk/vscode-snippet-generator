@@ -16,6 +16,7 @@ Happy coding!!!
 
 > Snippet tempalte
 > You can configure `"vscode-snippet-generator.prefix": ""` in `settings.json` to change the prefix.
+> You can configuae `"vscode-snippet-generator.languages": ["html", "typescript"]` in `settings.json` to support language list.
 
 ## Usage Command Line: Quick start
 

@@ -9,9 +9,14 @@ const KEYS = `vscode-snippet-generator`;
 // const notifier = new Notifier(KEYS + '.cache');
 let emmetDisposables: Disposable[] = [];
 
-async function do_cache() {
+function loadConfig(): void {
   const cog = workspace.getConfiguration(KEYS);
   CONFIG.prefix = cog.get('prefix') || '';
+  CONFIG.languages = cog.get('languages') || ['html', 'typescript'];
+}
+
+async function do_cache() {
+  loadConfig();
   CONFIG.caching = true;
   try {
     const sourceRoot = getVsCodeSnippets();
@@ -46,6 +51,8 @@ export async function activate(context: ExtensionContext) {
     return;
   }
 
+  loadConfig();
+
   context.subscriptions.push(
     commands.registerCommand('vscode-snippet-generator.cache', async () => {
       if (CONFIG.caching) {
@@ -56,12 +63,8 @@ export async function activate(context: ExtensionContext) {
     }),
   );
 
-  const languageSchemes = [
-    { scheme: 'file', language: 'html' },
-    { scheme: 'file', language: 'typescript' },
-  ];
-  emmetDisposables = languageSchemes.map((scheme) => {
-    return languages.registerCompletionItemProvider(scheme, new CompletionItemProvider(scheme.language));
+  emmetDisposables = CONFIG.languages.map((language) => {
+    return languages.registerCompletionItemProvider({ scheme: 'file', language }, new CompletionItemProvider(language));
   });
   context.subscriptions.push(...emmetDisposables);
 

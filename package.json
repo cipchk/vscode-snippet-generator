@@ -1,6 +1,6 @@
 {
   "name": "vscode-snippet-generator",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "description": "Generate a snippet extensions for vscode",
   "scripts": {
     "watch": "tsc -watch -p ./",
@@ -75,6 +75,17 @@
           "description": "Defines how this snippet is selected from IntelliSense and tab completion, default: ''",
           "type": "string",
           "default": ""
+        },
+        "vscode-snippet-generator.languages": {
+          "description": "Defines support language list, default: ['html', 'typescript']",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [
+            "html",
+            "typescript"
+          ]
         }
       }
     }

@@ -42,6 +42,17 @@
           "description": "Defines how this snippet is selected from IntelliSense and tab completion, default: ''",
           "type": "string",
           "default": ""
+        },
+        "vscode-snippet-generator.languages": {
+          "description": "Defines support language list, default: ['html', 'typescript']",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [
+            "html",
+            "typescript"
+          ]
         }
       }
     }
