@@ -6,7 +6,18 @@
 
 Generate a snippet extensions for vscode.
 
-## Quick start
+## Usage VSCode extension
+
+1. Install [Dynamic Custom Snippets](https://marketplace.visualstudio.com/items?itemName=cipchk.vscode-snippet-generator) extension.
+2. Add snippet files into `.vscode/snippets/` folder. (Please refer to the template content [Snippet tempalte](#Snippet-tempalte))
+3. The first time create the `.vscode/snippets/` folder, need to restart vscode; otherwise you only need to trigger the `vscode-snippet-generator: Cache all dynamic snippets` command again.
+
+Happy coding!!!
+
+> Snippet tempalte
+> You can configure `"vscode-snippet-generator.prefix": ""` in `settings.json` to change the prefix.
+
+## Usage Command Line: Quick start
 
 ```sh
 $ git clone --depth 1 https://github.com/cipchk/vscode-snippet-generator-tpl.git
@@ -42,6 +53,7 @@ scope: typescript,html
 
 - `prefix` defines how this snippet is selected from IntelliSense and tab completion. In this case `button`.
 - `description` is the description used in the IntelliSense drop down.
+- `scope` Restrict template scope, if not specified, it means no restriction. In this case `typescript` and `html` document.
 - markdown body is defines snippet code, muse be hava a code tag.
 
 > How to writing snippet code, pls refre to [vscode-Creating your own snippets](https://code.visualstudio.com/docs/editor/userdefinedsnippets)

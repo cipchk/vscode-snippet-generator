@@ -3,3 +3,6 @@ yarn.lock
 
 dist
 snippets.json
+
+publish
+*.vsix

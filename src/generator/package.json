@@ -1,0 +1,32 @@
+{
+  "name": "vscode-snippet-generator",
+  "version": "0.0.0-PLACEHOLDER",
+  "description": "Generate a snippet extensions for vscode",
+  "main": "./src/index",
+  "bin": {
+    "vscode-snippet-generator": "src/index.js"
+  },
+  "publisher": "cipchk",
+  "license": "MIT",
+  "homepage": "https://github.com/cipchk/vscode-snippet-generator/blob/master/README.md",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cipchk/vscode-snippet-generator.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cipchk/vscode-snippet-generator/issues",
+    "email": "cipchk@qq.com"
+  },
+  "keywords": [
+    "vscode",
+    "vscode snippet",
+    "vscode extension"
+  ],
+  "dependencies": {
+    "chalk": "^4.1.0",
+    "meow": "^7.1.1",
+    "klaw-sync": "^6.0.0",
+    "yaml-front-matter": "^4.1.0",
+    "markdown-it": "^11.0.1"
+  }
+}

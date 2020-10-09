@@ -1,0 +1,16 @@
+name: CI
+
+on: push
+
+jobs:
+  generator:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@master
+
+      - name: install
+        run: npm install
+
+      - name: lint-test
+        run: npm run ci

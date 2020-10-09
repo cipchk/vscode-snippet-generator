@@ -1,10 +1,10 @@
 import { expect } from 'chai';
-import { generator } from '../src/generator';
-import { DEFAULT_CONFIG } from '../src/interfaces';
+import { generator } from '../src/generator/generator';
+import { DEFAULT_CONFIG } from '../src/generator/interfaces';
 
 const DEFAULT = {
   ...DEFAULT_CONFIG,
-  sourceRoot: 'examples'
+  sourceRoot: 'examples',
 };
 
 describe('generator', () => {

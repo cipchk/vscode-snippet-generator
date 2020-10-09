@@ -1,19 +1,17 @@
 {
   "name": "vscode-snippet-generator",
-  "version": "1.2.2",
+  "version": "1.3.0",
   "description": "Generate a snippet extensions for vscode",
-  "main": "./src/index",
   "scripts": {
+    "watch": "tsc -watch -p ./",
     "build": "bash ./build.sh",
     "build:test": "bash ./build.sh -t",
     "lint": "tslint -p tsconfig.json -c tslint.json 'src/**/*.ts'",
     "test": "npm run mocha --recursive ./test/**/*.spec.ts",
     "mocha": "mocha -r ts-node/register",
     "ci": "npm run lint && npm run test",
-    "release": "npm run build && cd dist && npm publish --access public"
-  },
-  "bin": {
-    "vscode-snippet-generator": "src/index.js"
+    "release:cli": "npm run build && cd publish/node && npm publish --access public",
+    "release:vsix": "npm run build && cd publish/vscode-extension && vsce package -o ../../vscode-snippet-generator.vsix --yarn"
   },
   "publisher": "cipchk",
   "license": "MIT",
@@ -31,36 +29,54 @@
     "vscode snippet",
     "vscode extension"
   ],
-  "engines": {
-    "vscode": "^1.0.0"
-  },
-  "categories": ["Snippets"],
-  "contributes": {
-    "snippets": [{
-      "language": "html",
-      "path": "./snippets.json"
-    }]
-  },
   "dependencies": {
-    "chalk": "^2.4.1",
-    "meow": "^5.0.0",
+    "chalk": "^4.1.0",
+    "meow": "^7.1.1",
     "klaw-sync": "^6.0.0",
-    "yaml-front-matter": "^4.0.0",
-    "markdown-it": "^8.4.2"
+    "yaml-front-matter": "^4.1.0",
+    "markdown-it": "^11.0.1"
   },
   "devDependencies": {
-    "@types/node": "^10.12.2",
+    "@types/node": "^14.11.8",
     "@types/meow": "^5.0.0",
-    "@types/mocha": "^5.2.5",
-    "@types/chai": "^4.1.7",
-    "@types/markdown-it": "^0.0.7",
-    "@types/klaw-sync": "^5.0.0",
+    "@types/mocha": "^8.0.3",
+    "@types/chai": "^4.2.13",
+    "@types/markdown-it": "^10.0.2",
+    "@types/klaw-sync": "^6.0.0",
     "@types/chalk": "^2.2.0",
-    "typescript": "^3.2.2",
-    "ts-node": "^7.0.1",
-    "tslint": "^5.11.0",
-    "tslint-config-prettier": "^1.17.0",
-    "mocha": "^5.2.0",
-    "chai": "^4.2.0"
+    "@types/vscode": "^1.49.0",
+    "typescript": "^4.0.3",
+    "ts-node": "^9.0.0",
+    "tslint": "^6.1.3",
+    "tslint-config-prettier": "^1.18.0",
+    "mocha": "^8.1.3",
+    "chai": "^4.2.0",
+    "vsce": "^1.81.1"
+  },
+  "engines": {
+    "vscode": "^1.8.x"
+  },
+  "activationEvents": [
+    "onLanguage:typescript",
+    "onLanguage:html"
+  ],
+  "main": "./dist/src/vscode-extension/extension",
+  "contributes": {
+    "commands": [
+      {
+        "command": "vscode-snippet-generator.cache",
+        "title": "vscode-snippet-generator: Cache all dynamic snippets"
+      }
+    ],
+    "configuration": {
+      "title": "vscode-snippet-generator Extension Configuration",
+      "properties": {
+        "vscode-snippet-generator.prefix": {
+          "description": "Defines how this snippet is selected from IntelliSense and tab completion, default: ''",
+          "type": "string",
+          "default": ""
+        }
+      }
+    }
   }
 }
