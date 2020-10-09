@@ -1,8 +1,8 @@
 import { expect } from 'chai';
 import * as fs from 'fs';
 import * as path from 'path';
-import { DEFAULT_CONFIG } from '../src/interfaces';
-import { parse } from '../src/parse';
+import { DEFAULT_CONFIG } from '../src/generator/interfaces';
+import { parse } from '../src/generator/parse';
 
 function getMd(name: string): string {
   const filePath = path.join(__dirname, '../examples', name);
@@ -46,11 +46,11 @@ describe('parse', () => {
   });
   it('should be i18n template', () => {
     const fileName = 'i18n.md';
-    const res = parse(
-      getMd(fileName),
-      `c:${path.sep}mock${path.sep}${fileName}`,
-      { ...DEFAULT_CONFIG, i18n: 'en-US', i18nTpl: '{zh-CN}({en-US})' }
-    );
+    const res = parse(getMd(fileName), `c:${path.sep}mock${path.sep}${fileName}`, {
+      ...DEFAULT_CONFIG,
+      i18n: 'en-US',
+      i18nTpl: '{zh-CN}({en-US})',
+    });
     expect(res.description).to.be.eq('按钮(Button)');
   });
   it('should be i18n codes', () => {
