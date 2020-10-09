@@ -1,0 +1,56 @@
+{
+  "name": "vscode-snippet-generator",
+  "version": "0.0.0-PLACEHOLDER",
+  "displayName": "Dynamic Custom Snippets",
+  "description": "Dynamic custom a snippet of workspace",
+  "icon": "icon.png",
+  "publisher": "cipchk",
+  "license": "MIT",
+  "licenseUrl": "LICENSE",
+  "homepage": "https://github.com/cipchk/vscode-snippet-generator/blob/master/README.md",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cipchk/vscode-snippet-generator.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cipchk/vscode-snippet-generator/issues",
+    "email": "cipchk@qq.com"
+  },
+  "engines": {
+    "vscode": "^1.8.x"
+  },
+  "categories": [
+    "Programming Languages",
+    "Snippets"
+  ],
+  "main": "./src/extension",
+  "activationEvents": [
+    "onLanguage:typescript",
+    "onLanguage:html"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "vscode-snippet-generator.cache",
+        "title": "vscode-snippet-generator: Cache all dynamic snippets"
+      }
+    ],
+    "configuration": {
+      "title": "vscode-snippet-generator Extension Configuration",
+      "properties": {
+        "vscode-snippet-generator.prefix": {
+          "description": "Defines how this snippet is selected from IntelliSense and tab completion, default: ''",
+          "type": "string",
+          "default": ""
+        }
+      }
+    }
+  },
+  "dependencies": {
+    "chalk": "^4.1.0",
+    "meow": "^7.1.1",
+    "klaw-sync": "^6.0.0",
+    "yaml-front-matter": "^4.1.0",
+    "markdown-it": "^11.0.1"
+  }
+}

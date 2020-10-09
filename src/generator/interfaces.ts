@@ -2,7 +2,7 @@ export interface ConfigSchema {
   /** Source file root directory, can be set "src" "src1,src2", default: `src` */
   sourceRoot: string | string[];
   /** Output file path, default: `snippets.json` */
-  outFile: string;
+  outFile: string | null;
   /** Unified prefix */
   prefix: string;
   /** Multi-level directory separator, default: `-` */
@@ -33,7 +33,7 @@ export const DEFAULT_CONFIG: ConfigSchema = {
   prefix: '',
   separator: '-',
   ingoreDefaultMd: true,
-  i18n: DEFAULT_LANG
+  i18n: DEFAULT_LANG,
 };
 
 export interface Snippet {
