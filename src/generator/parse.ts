@@ -1,6 +1,6 @@
 import markdownit from 'markdown-it';
 const yamlFront = require('yaml-front-matter');
-import * as path from 'path';
+// import * as path from 'path';
 import { ConfigSchema, DEFAULT_LANG, Snippet } from './interfaces';
 
 const it = new markdownit({});
@@ -9,29 +9,30 @@ function isUndefined(meta: Snippet, key: string): boolean {
   return meta[key] != null;
 }
 
-function genDescriptionAndCode(tokens: any[]): { description: string, body: string } {
+function genDescriptionAndCode(tokens: any[]): { description: string; body: string } {
   // description
   let description = '';
-  const paragraphOpenTokenIndex = tokens.findIndex(w => w.type === 'paragraph_open');
-  if (paragraphOpenTokenIndex !== -1 && tokens.length >= (paragraphOpenTokenIndex + 1)) {
+  const paragraphOpenTokenIndex = tokens.findIndex((w) => w.type === 'paragraph_open');
+  if (paragraphOpenTokenIndex !== -1 && tokens.length >= paragraphOpenTokenIndex + 1) {
     const paragraphToken = tokens[paragraphOpenTokenIndex + 1];
     description = paragraphToken.content.trim();
   }
   // body
   let body = '';
-  const codeToken = tokens.find(w => w.tag === 'code');
+  const codeToken = tokens.find((w) => w.tag === 'code');
   if (codeToken != null) {
     body = codeToken.content.trim();
   }
   return { description, body };
 }
 
-function fixPrefix(meta: Snippet, fileName: string) {
+function fixPrefix(meta: Snippet, fileName: string): string | null {
   if (isUndefined(meta, 'prefix')) {
     return meta.prefix;
   }
-  const name = fileName.split(path.sep).pop() as string;
-  return name.endsWith('.md') ? name.substr(0, name.length - 3) : name;
+  return null;
+  // const name = fileName.split(path.sep).pop() as string;
+  // return name.endsWith('.md') ? name.substr(0, name.length - 3) : name;
 }
 
 function fixDescription(tokens: any[], meta: Snippet, config: ConfigSchema) {
@@ -50,16 +51,16 @@ function fixDescription(tokens: any[], meta: Snippet, config: ConfigSchema) {
 }
 
 function fixBody(tokens: any[], meta: Snippet, config: ConfigSchema): any {
-  const codeToken = tokens.find(w => w.tag === 'code');
+  const codeToken = tokens.find((w) => w.tag === 'code');
   if (!codeToken) {
     throw new Error(`Must have a code body`);
   }
 
   const headingTokenPos = tokens
-    .map((w, index) => w.type === 'heading_open' && (w.tag === 'h1' || w.tag === 'h2') ? index : -1)
-    .filter(idx => idx !== -1)
-    .map(start => {
-      const end = tokens.slice(start).findIndex(w => w.tag === 'code');
+    .map((w, index) => (w.type === 'heading_open' && (w.tag === 'h1' || w.tag === 'h2') ? index : -1))
+    .filter((idx) => idx !== -1)
+    .map((start) => {
+      const end = tokens.slice(start).findIndex((w) => w.tag === 'code');
       return { start, end: start + end + 1 };
     });
 

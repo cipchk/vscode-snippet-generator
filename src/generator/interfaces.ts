@@ -41,7 +41,7 @@ export interface Snippet {
   /** 指定唯一标识符 */
   name: string;
   /** 定义智能感知前缀 */
-  prefix: string;
+  prefix: string | null;
   /** 片段内容 */
   body: string;
   /** 片段描述信息 */
